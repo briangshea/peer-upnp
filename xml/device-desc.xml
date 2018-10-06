@@ -2,7 +2,7 @@
 <root xmlns="urn:schemas-upnp-org:device-1-0" configId="<%=configId%>">
 	<specVersion>
 		<major>1</major>
-		<minor>1</minor>
+		<minor>0</minor>
 	</specVersion>
 	<device>
 	    <!-- REQUIRED: MUST be <= 64 chars, not counting the version suffix and separating colon -->
@@ -75,8 +75,33 @@
 		<% } %>
 		<% if(Object.keys(devices).length>0){ %>
 		<deviceList>
-		    <% for(var i in devices){ %>
-		    <device></device>
+		    <% for(var i in devices) { %>
+		    <device>
+					<deviceType><%=devices[i].deviceType || ''%></deviceType>
+					<friendlyName><%=devices[i].friendlyName || ''%></friendlyName>
+					<manufacturer><%=devices[i].manufacturer || ''%></manufacturer>
+ 					<manufacturerURL><%=devices[i].manufacturerURL || ''%></manufacturerURL>
+ 					<modelDescription><%=devices[i].modelDescription || ''%></modelDescription>
+ 					<modelName><%=devices[i].modelName || ''%></modelName>
+ 					<modelNumber><%=devices[i].modelNumber || ''%></modelNumber>
+ 					<modelURL><%=devices[i].modelURL || ''%></modelURL>
+ 					<serialNumber><%=devices[i].serialNumber || ''%></serialNumber>
+ 					<UDN>uuid:<%=devices[i].uuid || ''%></UDN>
+ 					<UPC><%=devices[i].UPC || ''%></UPC>
+					<% if( Object.keys(devices[i].services).length>0 ) { %>
+					<serviceList>
+						<% for( var j in devices[i].services ) { %>
+			 		  <service>
+			 		  <serviceType><%=devices[i].services[j].serviceType%></serviceType>
+					  <serviceId><%=devices[i].services[j].serviceID%></serviceId>
+					  <SCPDURL><%=devices[i].services[j].SCPDURL%></SCPDURL>
+					  <controlURL><%=devices[i].services[j].controlURL%></controlURL>
+					  <eventSubURL><%=devices[i].services[j].eventSubURL%></eventSubURL>
+					  </service>
+						<% } %>
+					</serviceList>
+				<% } %>
+				</device>
 			<% } %>
 		</deviceList>
 		<% } %>
@@ -85,4 +110,4 @@
 		<presentationURL><%=presentationURL || ''%></presentationURL>
 		<% } %>
 	</device>
-</root> 
+</root>
