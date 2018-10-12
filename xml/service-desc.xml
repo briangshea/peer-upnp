@@ -2,15 +2,15 @@
 <scpd xmlns="urn:schemas-upnp-org:service-1-0" configId="<%=configId%>">
 	<specVersion>
 		<major>1</major>
-		<minor>0</minor>
+		<minor>1</minor>
 	</specVersion>
 	<actionList>
-	<% 	for(var actionName in actions){
+	<% 	for(var actionName in actions){ 
 		var action = actions[actionName];%>
 		<action>
 			<name><%=actionName%></name>
 			<argumentList>
-			<% 	for(var inputName in action.inputs){
+			<% 	for(var inputName in action.inputs){ 
 				var variableName = action.inputs[inputName];%>
 				<argument>
 					<name><%=inputName%></name>
@@ -18,7 +18,7 @@
 					<relatedStateVariable><%=variableName%></relatedStateVariable>
 				</argument>
 			<% } %>
-			<% 	for(var outputName in action.outputs){
+			<% 	for(var outputName in action.outputs){ 
 				var variableName = action.outputs[outputName];%>
 				<argument>
 					<name><%=outputName%></name>
@@ -31,7 +31,7 @@
 	<% } %>
 	</actionList>
 	<serviceStateTable>
-	<% 	for(var variableName in variables){
+	<% 	for(var variableName in variables){ 
 		var variable = variables[variableName];
 		variable = (typeof variable == "string")? {type: variable}: variable;%>
 		<stateVariable sendEvents="<%=(variable.event===true?'yes':'no')%>" multicast="<%=(variable.multicast===true?'yes':'no')%>">
@@ -49,7 +49,7 @@
 			</allowedValueRange>
 			<% } if(variable.enum instanceof Array){ %>
 			<allowedValueList>
-			    <% 	for(var i in variable.enum){ %>
+			    <% 	for(var i in variable.enum){ %> 
 				<allowedValue><%=variable.enum[i]%></allowedValue>
 				<% } %>
 			</allowedValueList>
